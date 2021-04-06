@@ -1,0 +1,32 @@
+<form class="" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div class="input-group mb-3">
+      <div>
+        <span class="input-group-text" id="basic-addon1">Email</span>
+      </div>
+      <input id="email" class="form-control" type="email" formControlName="email" [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}">
+      <span class="form-text" *ngIf="form.get('email').invalid && form.get('email').touched">
+        <span *ngIf="form.get('email').errors['required']">Email не должен быть пустым</span>
+        <span *ngIf="form.get('email').errors['email']">Email не корректен</span>
+      </span>
+    </div>
+
+    <div class="input-group mb-3">
+      <div>
+        <span class="input-group-text" id="basic-addon2">Пароль</span>
+      </div>
+      <input id="password" class="form-control" type="password" formControlName="password" [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}">
+      <span class="helper-text red-text" *ngIf="form.get('password').invalid && form.get('password').touched">
+        <span *ngIf="form.get('password').errors['required']">Пароль не должен быть пустым</span>
+        <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">Пароль должен быть больше {{form.get('password').errors['minlength']['requiredLength']}} символов</span>
+      </span>
+    </div>
+
+    <div class="justify-content-center">
+      <button class="btn btn-primary btn-block" type="submit" [disabled]="form.invalid" >Войти</button>
+    </div>
+  </div>
+
+</form>
+
+

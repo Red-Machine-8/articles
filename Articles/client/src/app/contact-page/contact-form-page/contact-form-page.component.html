@@ -1,0 +1,57 @@
+<div class="page-title">
+  <h4>
+
+    <i class="material-icons">{{isNew ? 'Добавить' : 'Редактировать'}}</i>
+
+  </h4>
+  <span *ngIf="!isNew">
+    <button
+      class="btn btn-danger"
+      (click)="deleteContact()"
+      [disabled]="form.disabled"
+    >
+      <i>Удалить</i>
+    </button>
+  </span>
+</div>
+
+<div class="row">
+  <form class="col-4 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <span class="input-group-text">Заголовок</span>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        [ngClass]="{'invalid': form.get('title').invalid && form.get('title').touched}"
+      >
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('title').invalid && form.get('title').touched"
+      >
+        <span *ngIf="form.get('title').errors['required']">
+          Заголовок не может быть пустым
+        </span>
+      </span>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">Текст</span>
+      <input
+        id="body"
+        type="text"
+        formControlName="body"
+      >
+    </div>
+
+    <div>
+      <button
+        class="btn btn-dark btn-block"
+        type="submit"
+        [disabled]="form.invalid || form.disabled"
+      >
+        Опубликовать
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,33 @@
+<div class="row">
+  <span class="page-title">
+    <button
+      class="btn btn-dark"
+      routerLink="/contacts/new"
+    >Добавить новость</button>
+  </span>
+</div>
+
+<div class="row" *ngIf="contact$ | async as contacts; else loader">
+  <div class="col-sm-9">
+    <div class="list-group" *ngIf="contacts.length !== 0; else empty">
+      <a
+        *ngFor="let contact of contacts"
+        [routerLink]="['/contacts', contact._id]"
+        class="list-group-item list-group-item-action"
+      >
+        <h1>{{contact.title}}</h1>
+
+      </a>
+    </div>
+
+    <ng-template #empty>
+      <div class="center">
+        Список статей пуст
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
